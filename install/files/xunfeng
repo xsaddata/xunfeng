@@ -70,6 +70,14 @@ do_restart(){
     do_start
 }
 
+do_reset(){
+    do_stop
+    sleep 1
+    rm /var/lib/xunfeng -rf
+    cp /var/lib/xunfengbk /var/lib/xunfeng -r
+    do_start
+}
+
 do_status() {
     (supervisorctl -c /etc/xunfeng.conf status |grep xunfeng: )|| return 1
     return 0
@@ -87,6 +95,9 @@ case "$1" in
         ;;
     status)
         do_status
+        ;;
+    reset)
+        do_reset
         ;;
     *)
         echo "Usage: $NAME {start|stop|status|restart}" >&2
