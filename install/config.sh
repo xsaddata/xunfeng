@@ -137,3 +137,7 @@ writeconfig
 install_service
 initdb
 /etc/init.d/xunfeng restart
+/etc/init.d/xunfeng stop
+cp /var/lib/xunfeng /var/lib/xunfengbk -r
+/etc/init.d/xunfeng start
+
